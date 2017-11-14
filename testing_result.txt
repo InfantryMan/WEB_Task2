@@ -1,0 +1,59 @@
+  nginx - статика, без кеширования
+Running 5s test @ http://backend/static/example.html
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   808.85us  471.31us  10.73ms   93.38%
+    Req/Sec     6.44k   836.17    11.21k    90.10%
+  64670 requests in 5.10s, 28.12MB read
+Requests/sec:  12680.54
+Transfer/sec:      5.51MB
+
+  gunicorn - статика
+Running 5s test @ http://backend:8000/static/
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    13.52ms    1.50ms  26.83ms   91.70%
+    Req/Sec   368.76     29.33   404.00     72.00%
+  3674 requests in 5.00s, 1.16MB read
+Requests/sec:    734.14
+Transfer/sec:    237.30KB
+
+  nginx - статика, с кешированием
+Running 5s test @ http://backend/static/example.html
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.10ms    2.58ms  45.13ms   90.84%
+    Req/Sec    18.95k     2.57k   33.92k    87.13%
+  190266 requests in 5.10s, 82.73MB read
+Requests/sec:  37311.68
+Transfer/sec:     16.22MBi
+
+  gunicorn - динамика 
+Running 5s test @ http://localhost:8000/
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    71.19ms    5.96ms  99.11ms   91.97%
+    Req/Sec    69.70     15.15   101.00     54.00%
+  697 requests in 5.01s, 7.15MB read
+Requests/sec:    139.25
+Transfer/sec:      1.43MB
+
+  gunicorn + nginx без кеширования
+Running 5s test @ http://localhost/
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    73.20ms    4.48ms  96.20ms   96.76%
+    Req/Sec    67.90     13.87    90.00     61.00%
+  679 requests in 5.01s, 6.97MB read
+Requests/sec:    135.64
+Transfer/sec:      1.39MB
+
+  gunicorn + nginx с кешированием
+Running 5s test @ http://localhost/
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.88ms    6.51ms 110.32ms   94.61%
+    Req/Sec    17.45k     3.66k   35.93k    85.15%
+  175318 requests in 5.10s, 1.76GB read
+Requests/sec:  34379.32
+Transfer/sec:    352.88MB
